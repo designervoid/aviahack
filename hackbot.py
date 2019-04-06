@@ -5,7 +5,7 @@ from db import AviaSchleduleArrival, AviaSchleduleDeparture
 
 TOKEN = '879676273:AAGPMmb_l9m3BVkGgh-U_pkn2X9eU5jtUjw'
 
-dates = {}
+state = 0
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -23,6 +23,16 @@ def log(message, answer):
     print(answer)
 
 
+def date_user_today(message):
+    date_today = {'today': str(datetime.utcfromtimestamp(message.date).strftime('%Y-%m-%d'))}
+    return date_today['today']
+
+
+def date_user_input(message):
+    date_today = {'user_input': str(datetime.utcfromtimestamp(message.date).strftime('%Y-%m-%d'))}
+    return date_today['user_input']
+
+
 def custom_keyboard_in_commands(message,
                                 custom_keyboard, text='Выберите что вам нужно'):
     user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
@@ -35,48 +45,6 @@ def requests_to_text(message, answer='Укажите номер рейса ил�
     bot.send_message(message.chat.id, '{}'.format(answer))
 
 
-def user_data_input(message):
-    if message.text == 'Прилет':
-        for data in AviaSchleduleArrival.select():
-            if data.date == dates['today']:
-                requests_to_text(message=message, answer='Airport: {} '
-                                                         'Number Flight: {} '
-                                                         'Date: {} '
-                                                         'Departure: {} '
-                                                         'Arrival: {}'.format(data.airport,
-                                                                              data.flight,
-                                                                              data.date,
-                                                                              data.departure,
-                                                                              data.arrival))
-
-            # elif data.date == dates['tommorow']:
-
-            # elif data.date == dates['user_choice']:
-
-    if message.text == 'Вылет':
-        for data in AviaSchleduleDeparture.select():
-            requests_to_text(message=message, answer='Airport: {} '
-                                                     'Number Flight: {} '
-                                                     'Date: {} '
-                                                     'Departure: {} '
-                                                     'Arrival: {}'.format(data.airport,
-                                                                          data.flight,
-                                                                          data.date,
-                                                                          data.departure,
-                                                                          data.arrival))
-
-    if message.text == 'Назад к выбору':
-        start_handler(message=message)
-
-    if message.text == 'Назад к выбору даты':
-        start_schedule(message=message)
-
-    if message.text == 'Назад к выбору типа':
-        start_schedule(message=message)
-
-# add handler with date of user message
-
-
 @bot.message_handler(regexp='start')
 def start_handler(message):
     words = 'Расписание', 'Правила перевозки', 'Бронирование перевозки', \
@@ -86,8 +54,8 @@ def start_handler(message):
 
 @bot.message_handler(regexp='Расписание')
 def start_schedule(message):
-    cmnds = 'Сегодня', 'Завтра', 'Своя дата', 'Назад к выбору'
-    custom_keyboard_in_commands(message=message, custom_keyboard=cmnds, text='Какая дата вам нужна')
+    cmnds = 'Сегодня', 'Завтра', 'Своя дата', 'Назад к выбору меню'
+    custom_keyboard_in_commands(message=message, custom_keyboard=cmnds, text='Выберите дату')
 
 
 @bot.message_handler(regexp='Правила перевозки')
@@ -112,17 +80,26 @@ def start_avialability_check(message):
 
 @bot.message_handler(regexp='Сегодня')
 def start_today_check(message):
+    global state
+    state = 1
     cmnds = 'Прилет', 'Вылет', 'Назад к выбору типа'
-    dates['today'] = datetime.utcfromtimestamp(message.date).strftime('%Y-%m-%d')
-    bot.send_message(chat_id=message.from_user.id, text=dates['today'])
     custom_keyboard_in_commands(message=message, custom_keyboard=cmnds, text='Выберите тип')
 
 
 @bot.message_handler(regexp='Завтра')
-def start_today_check(message):
+def start_tomorrow_check(message):
+    global state
+    state = 2
     cmnds = 'Прилет', 'Вылет', 'Назад к выбору типа'
-    chng_date_tmrw = datetime.utcfromtimestamp(message.date).strftime('%Y-%m-%d')
     custom_keyboard_in_commands(message=message, custom_keyboard=cmnds, text='Выберите тип')
+
+
+@bot.message_handler(regexp='Своя дата')
+def start_user_input_check(message):
+    global state
+    state = 3
+    global user_input
+    user_input = message.from_user.id
 
 
 @bot.message_handler(regexp='stop')
@@ -134,7 +111,87 @@ def stop_handler(message):
 
 @bot.message_handler(content_types=['text'])
 def text_handler(message):
-    user_data_input(message=message)
+    print(state)
+    if state == 1:  # check today date
+        if message.text == 'Прилет':
+            for data in AviaSchleduleArrival.select():
+                check = date_user_today(message)
+                if str(check) == str(data.date):
+                    requests_to_text(message=message, answer='Airport: {} '
+                                                             'Number Flight: {} '
+                                                             'Date: {} '
+                                                             'Departure: {} '
+                                                             'Arrival: {}'.format(data.airport,
+                                                                                  data.flight,
+                                                                                  data.date,
+                                                                                  data.departure,
+                                                                                  data.arrival))
+
+        elif message.text == 'Вылет':
+            for data in AviaSchleduleArrival.select():
+                check = date_user_today(message)
+                if str(check) == str(data.date):
+                    requests_to_text(message=message, answer='Airport: {} '
+                                                             'Number Flight: {} '
+                                                             'Date: {} '
+                                                             'Departure: {} '
+                                                             'Arrival: {}'.format(data.airport,
+                                                                                  data.flight,
+                                                                                  data.date,
+                                                                                  data.departure,
+                                                                                  data.arrival))
+
+        elif message.text == 'Назад к выбору типа':
+            start_schedule(message=message)
+
+        elif message.text == 'Назад к выбору меню':
+            start_handler(message=message)
+
+    elif state == 2:    # check tommorow date
+        if message.text == 'Прилет':
+            for data in AviaSchleduleArrival.select():
+                check = date_user_today(message)
+                if str(check) == str(data.date):
+                    requests_to_text(message=message, answer='Airport: {} '
+                                                             'Number Flight: {} '
+                                                             'Date: {} '
+                                                             'Departure: {} '
+                                                             'Arrival: {}'.format(data.airport,
+                                                                                  data.flight,
+                                                                                  data.date,
+                                                                                  data.departure,
+                                                                                  data.arrival))
+
+        elif message.text == 'Вылет':
+            for data in AviaSchleduleArrival.select():
+                check = date_user_today(message)
+                if str(check) == str(data.date):
+                    requests_to_text(message=message, answer='Airport: {} '
+                                                             'Number Flight: {} '
+                                                             'Date: {} '
+                                                             'Departure: {} '
+                                                             'Arrival: {}'.format(data.airport,
+                                                                                  data.flight,
+                                                                                  data.date,
+                                                                                  data.departure,
+                                                                                  data.arrival))
+
+        elif message.text == 'Назад к выбору типа':
+            start_schedule(message=message)
+
+        elif message.text == 'Назад к выбору меню':
+            start_handler(message=message)
+
+    # elif state 3
+
+    elif message.text == 'Назад к выбору меню':
+        start_handler(message=message)
+
+    elif message.text == 'Назад к выбору даты':
+        start_schedule(message=message)
+
+
+    # add handler with date of user message
 
 
 if __name__ == '__main__':

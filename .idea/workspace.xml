@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52214788-ae7e-4804-bb61-7f2bfff80f1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../test_repo/aio_bot.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../test_repo/bot.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../test_repo/data.py" afterDir="false" />
@@ -13,10 +10,6 @@
       <change afterPath="$PROJECT_DIR$/../test_repo/test_machine_state.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../test_repo/test_pillow.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../test_repo/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avia_schedule_arrival.db" beforeDir="false" afterPath="$PROJECT_DIR$/avia_schedule_arrival.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avia_schedule_departure.db" beforeDir="false" afterPath="$PROJECT_DIR$/avia_schedule_departure.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hackbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/hackbot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../test_repo/repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test_repo/class_advert.py" afterDir="false" />
     </list>
@@ -28,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hackbot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="116" column="71" lean-forward="true" selection-start-line="116" selection-start-column="71" selection-end-line="116" selection-end-column="71" />
+            <state relative-caret-position="2789">
+              <caret line="195" selection-start-line="195" selection-end-line="195" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -40,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/db.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="73" column="32" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="32" />
+            <state relative-caret-position="379">
+              <caret line="64" column="59" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -65,8 +58,9 @@
     <findStrings>
       <find>steps</find>
       <find>db</find>
-      <find>user_data</find>
       <find>прилет</find>
+      <find>user_data</find>
+      <find>назад к выбору</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -206,7 +200,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3287858" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39972714" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -218,6 +212,22 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/hackbot.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/hackbot.py</url>
+          <line>114</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../test_repo/python3_venv/lib/python3.7/site-packages/telebot/__init__.py">
@@ -241,22 +251,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db.py">
+    <entry file="file://$PROJECT_DIR$/hackbot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="73" column="32" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="32" />
+        <state relative-caret-position="2789">
+          <caret line="195" selection-start-line="195" selection-end-line="195" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hackbot.py">
+    <entry file="file://$PROJECT_DIR$/db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="116" column="71" lean-forward="true" selection-start-line="116" selection-start-column="71" selection-end-line="116" selection-end-column="71" />
+        <state relative-caret-position="379">
+          <caret line="64" column="59" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
