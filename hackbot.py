@@ -5,7 +5,7 @@ from db import AviaSchleduleArrival, AviaSchleduleDeparture
 
 TOKEN = '879676273:AAGPMmb_l9m3BVkGgh-U_pkn2X9eU5jtUjw'
 
-base = {}
+dates = {}
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -38,15 +38,21 @@ def requests_to_text(message, answer='Укажите номер рейса ил�
 def user_data_input(message):
     if message.text == 'Прилет':
         for data in AviaSchleduleArrival.select():
-            requests_to_text(message=message, answer='Airport: {} '
-                                                     'Number Flight: {} '
-                                                     'Date: {} '
-                                                     'Departure: {} '
-                                                     'Arrival: {}'.format(data.airport,
-                                                                          data.flight,
-                                                                          data.date,
-                                                                          data.departure,
-                                                                          data.arrival))
+            if data.date == dates['today']:
+                requests_to_text(message=message, answer='Airport: {} '
+                                                         'Number Flight: {} '
+                                                         'Date: {} '
+                                                         'Departure: {} '
+                                                         'Arrival: {}'.format(data.airport,
+                                                                              data.flight,
+                                                                              data.date,
+                                                                              data.departure,
+                                                                              data.arrival))
+
+            # elif data.date == dates['tommorow']:
+
+            # elif data.date == dates['user_choice']:
+
     if message.text == 'Вылет':
         for data in AviaSchleduleDeparture.select():
             requests_to_text(message=message, answer='Airport: {} '
@@ -68,10 +74,11 @@ def user_data_input(message):
     if message.text == 'Назад к выбору типа':
         start_schedule(message=message)
 
+# add handler with date of user message
+
 
 @bot.message_handler(regexp='start')
 def start_handler(message):
-    bot.send_message(chat_id=message.from_user.id, text=message.date)
     words = 'Расписание', 'Правила перевозки', 'Бронирование перевозки', \
             'Операции с бронированием', 'Проверка наличия мест'
     custom_keyboard_in_commands(message=message, custom_keyboard=words)
@@ -106,12 +113,15 @@ def start_avialability_check(message):
 @bot.message_handler(regexp='Сегодня')
 def start_today_check(message):
     cmnds = 'Прилет', 'Вылет', 'Назад к выбору типа'
+    dates['today'] = datetime.utcfromtimestamp(message.date).strftime('%Y-%m-%d')
+    bot.send_message(chat_id=message.from_user.id, text=dates['today'])
     custom_keyboard_in_commands(message=message, custom_keyboard=cmnds, text='Выберите тип')
 
 
 @bot.message_handler(regexp='Завтра')
 def start_today_check(message):
     cmnds = 'Прилет', 'Вылет', 'Назад к выбору типа'
+    chng_date_tmrw = datetime.utcfromtimestamp(message.date).strftime('%Y-%m-%d')
     custom_keyboard_in_commands(message=message, custom_keyboard=cmnds, text='Выберите тип')
 
 

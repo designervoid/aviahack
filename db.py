@@ -49,9 +49,9 @@ if __name__ == '__main__':
     ]
     airport_arrival = 'Vnukovo'
     time_arrival = '04:20'
-    date_arrival = '20.04.2019'
+    date_arrival = '2019-04-20'
     departure_arrival = 'Moscow'
-    arrival_arr = 'Los-Angeles'
+    arrival_arr = 'Los Angeles'
     status_arrival = True,  # reformat
     type_arrival = ''   # reformat
 
@@ -71,8 +71,8 @@ if __name__ == '__main__':
     ]
     airport_departure = 'LA Airport'
     time_departure = '04:20'
-    date_departure = '04.20.2019'
-    departure_departure = 'Los-Angeles'
+    date_departure = '2019-04-20'
+    departure_departure = 'Los Angeles'
     arrival_departure = 'Moscow'
     status_departure = True,  # reformat
     type_departure = ''   # reformat
