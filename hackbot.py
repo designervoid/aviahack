@@ -34,17 +34,25 @@ def date_user_input(message):
 
 
 def custom_keyboard_in_commands(message,
-                                custom_keyboard, text='Выберите что вам нужно'):
-    user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
+                                custom_keyboard, text='Выберите что вам нужно',
+                                param_true=True,
+                                param_false=False):
+    user_markup = telebot.types.ReplyKeyboardMarkup(param_true, param_false)
     user_markup.add(*custom_keyboard)
     bot.send_message(message.from_user.id, text, reply_markup=user_markup)
+
+
+def resize_custom_keyboard_in_commands(message, custom_keyboard, text):
+    keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+    keyboard.add(*custom_keyboard)
+    bot.send_message(message.from_user.id, text, reply_markup=keyboard)
 
 
 def requests_to_text(message, answer='Укажите номер рейса или регистрационный номер билета'):
     log(message, answer)
     bot.send_message(message.chat.id, '{}'.format(answer))
 
-
+# MAIN MENU
 @bot.message_handler(regexp='start')
 def start_handler(message):
     words = 'Расписание', 'Правила перевозки', 'Бронирование перевозки', \
@@ -60,7 +68,10 @@ def start_schedule(message):
 
 @bot.message_handler(regexp='Правила перевозки')
 def start_rules_traffic(message):
-    requests_to_text(message=message, answer='правила перевозки')
+    global state
+    state = 4
+    cmnds = 'Внутрирегиональный', 'Межрегиональный', 'Международный', 'Назад к выбору меню'
+    custom_keyboard_in_commands(message=message, custom_keyboard=cmnds, text='Выберите тип рейса')
 
 
 @bot.message_handler(regexp='Бронирование перевозки')
@@ -77,7 +88,7 @@ def start_oprtions_wth_booking(message):
 def start_avialability_check(message):
     requests_to_text(message=message, answer='проверка наличия мест')
 
-
+# STATES WITH TICKETS
 @bot.message_handler(regexp='Сегодня')
 def start_today_check(message):
     global state
@@ -101,14 +112,14 @@ def start_user_input_check(message):
     global user_input
     user_input = message.from_user.id
 
-
+# HIDE
 @bot.message_handler(regexp='stop')
 def stop_handler(message):
     user_hide = telebot.types.ReplyKeyboardRemove()
     bot.send_message(message.from_user.id, 'hide',
                      reply_markup=user_hide)
 
-
+# TEXT
 @bot.message_handler(content_types=['text'])
 def text_handler(message):
     print(state)
@@ -141,12 +152,6 @@ def text_handler(message):
                                                                                   data.departure,
                                                                                   data.arrival))
 
-        elif message.text == 'Назад к выбору типа':
-            start_schedule(message=message)
-
-        elif message.text == 'Назад к выбору меню':
-            start_handler(message=message)
-
     elif state == 2:    # check tommorow date
         if message.text == 'Прилет':
             for data in AviaSchleduleArrival.select():
@@ -176,21 +181,35 @@ def text_handler(message):
                                                                                   data.departure,
                                                                                   data.arrival))
 
-        elif message.text == 'Назад к выбору типа':
-            start_schedule(message=message)
-
-        elif message.text == 'Назад к выбору меню':
-            start_handler(message=message)
 
     # elif state 3
 
-    elif message.text == 'Назад к выбору меню':
-        start_handler(message=message)
+    elif state == 4:
+        vars_avia_types = 'Внутрирегиональный', 'Межрегиональный', 'Международный'
+        companies = 'Аврора', 'Аэрофлот', 'Назад к выбору меню'
+        vars_rules_traffic = 'Нормы багажа', 'Перевозка негабаритного багажа', \
+                             'Перевозка домашних животных', 'Перевозка спорт инвентаря', 'Назад к выбору меню'
 
-    elif message.text == 'Назад к выбору даты':
-        start_schedule(message=message)
+        if message.text in vars_avia_types:
+            custom_keyboard_in_commands(message=message, custom_keyboard=companies, text='Выберите авиакомпанию')
+        elif message.text in companies:
+            resize_custom_keyboard_in_commands(message=message, custom_keyboard=vars_rules_traffic,
+                                               text='Выберите категорию')
+        elif message.text == 'Перевозка домашних животных':
+            requests_to_text(message=message, answer=''' 
+                    Если вы решили взять в путешествие своего питомца, обязательно сообщите об этом авиакомпании не позднее, чем за 36 часов до вылета (диспетчеру при бронировании или покупке авиабилета), поскольку перевозка животных производится только с согласия авиакомпании и существуют ограничения по количеству и видам перевозимых животных.''')
 
 
+    test = 0, 1, 2, 3, 4, 5, 6
+    if state in test:
+        if message.text == 'Назад к выбору меню':
+            start_handler(message=message)
+
+        elif message.text == 'Назад к выбору типа':
+            start_schedule(message=message)
+
+        elif message.text == 'Назад к выбору даты':
+            start_schedule(message=message)
     # add handler with date of user message
 
 

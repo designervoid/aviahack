@@ -47,10 +47,10 @@ if __name__ == '__main__':
         ''.join([random.choice(list(literals.upper())) for i in range(2)]),
         ''.join([random.choice(list(nums)) for j in range(4)])
     ]
-    airport_arrival = 'Vnukovo'
-    time_arrival = '04:20'
-    date_arrival = '2019-04-20'
-    departure_arrival = 'Moscow'
+    airport_arrival = 'Pulkovo Airport'
+    time_arrival = '20:04'
+    date_arrival = '2019-04-06'
+    departure_arrival = 'Saint-Petersburg'
     arrival_arr = 'Los Angeles'
     status_arrival = True,  # reformat
     type_arrival = ''   # reformat
@@ -70,10 +70,10 @@ if __name__ == '__main__':
         ''.join([random.choice(list(nums)) for j in range(4)])
     ]
     airport_departure = 'LA Airport'
-    time_departure = '04:20'
-    date_departure = '2019-04-20'
+    time_departure = '20:04'
+    date_departure = '2019-04-06'
     departure_departure = 'Los Angeles'
-    arrival_departure = 'Moscow'
+    arrival_departure = 'Saint-Petersburg'
     status_departure = True,  # reformat
     type_departure = ''   # reformat
 
