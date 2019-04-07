@@ -66,10 +66,10 @@ if __name__ == '__main__':
         ''.join([random.choice(list(literals.upper())) for i in range(2)]),
         ''.join([random.choice(list(nums)) for j in range(4)])
     ]
-    airport_arrival = 'Pulkovo Airport'
-    time_arrival = '20:04'
-    date_arrival = '2019-04-06'
-    departure_arrival = 'Saint-Petersburg'
+    airport_arrival = 'Vnukovo Airport'
+    time_arrival = '19:40'
+    date_arrival = '10-04-2019'
+    departure_arrival = 'Moscow'
     arrival_arr = 'Los Angeles'
     status_arrival = True,  # reformat
     type_arrival = ''   # reformat
@@ -88,11 +88,11 @@ if __name__ == '__main__':
         ''.join([random.choice(list(literals.upper())) for i in range(2)]),
         ''.join([random.choice(list(nums)) for j in range(4)])
     ]
-    airport_departure = 'LA Airport'
-    time_departure = '20:04'
-    date_departure = '2019-04-06'
-    departure_departure = 'Los Angeles'
-    arrival_departure = 'Saint-Petersburg'
+    airport_departure = 'Sheremetyvo Airport'
+    time_departure = '16:04'
+    date_departure = '10-04-2019'
+    departure_departure = 'Moscow'
+    arrival_departure = 'Novosibirsk'
     status_departure = True,  # reformat
     type_departure = ''   # reformat
 
@@ -108,8 +108,8 @@ if __name__ == '__main__':
 
     data_usr = 'Maxim, 89258329337'
 
-    user_data_input = UserData.create(data=data_usr,
-                                      is_relative=True)
+    # user_data_input = UserData.create(data=data_usr,
+                                      # is_relative=True)
 
     for data_arrival in AviaSchleduleArrival.select():
         print(data_arrival.airport, data_arrival.flight, data_arrival.date,
@@ -120,5 +120,5 @@ if __name__ == '__main__':
               data_departure.departure, data_departure.arrival)
 
     for data_user in UserData.select():
-        print(data_user.date, data_user.name, data_user.telephone)
+        print(data_user.data)
 

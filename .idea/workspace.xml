@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52214788-ae7e-4804-bb61-7f2bfff80f1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/viber_bot.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../test_repo/aio_bot.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../test_repo/bot.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../test_repo/data.py" afterDir="false" />
@@ -11,14 +10,13 @@
       <change afterPath="$PROJECT_DIR$/../test_repo/test_machine_state.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../test_repo/test_pillow.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../test_repo/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/avia_schedule_arrival.db" beforeDir="false" afterPath="$PROJECT_DIR$/avia_schedule_arrival.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/avia_schedule_departure.db" beforeDir="false" afterPath="$PROJECT_DIR$/avia_schedule_departure.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_user.db" beforeDir="false" afterPath="$PROJECT_DIR$/data_user.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_user.vdb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payment_test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment_test_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vedis_bot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_data_input.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../test_repo/repo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test_repo/class_advert.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/payment_test_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="358" column="24" lean-forward="true" selection-start-line="358" selection-start-column="24" selection-end-line="358" selection-end-column="24" />
+            <state relative-caret-position="254">
+              <caret line="426" column="93" selection-start-line="426" selection-start-column="93" selection-end-line="426" selection-end-column="93" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -57,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/payment_test.py">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="59" lean-forward="true" selection-start-column="59" selection-end-column="59" />
+              <caret column="59" selection-start-column="59" selection-end-column="59" />
               <folding>
                 <element signature="e#239#253#0" expanded="true" />
               </folding>
@@ -78,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
-              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+              <caret line="3" column="4" selection-start-line="3" selection-end-line="3" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -86,8 +84,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="108" column="35" lean-forward="true" selection-start-line="108" selection-start-column="35" selection-end-line="108" selection-end-column="35" />
+            <state relative-caret-position="384">
+              <caret line="92" column="24" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -106,17 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user_data</find>
-      <find>назад к выбору</find>
-      <find>выберите авиа</find>
-      <find>авиа</find>
-      <find>TOKEN</find>
-      <find>state</find>
-      <find>dbwprker</find>
-      <find>send_message</find>
-      <find>reque</find>
-      <find>date_user</find>
-      <find>dbworker</find>
       <find>provider</find>
       <find>prices</find>
       <find>PAYMENT_PROVIDER</find>
@@ -124,7 +111,6 @@
       <find>real</find>
       <find>param_tru</find>
       <find>TIME_MACHINE</find>
-      <find>test</find>
       <find>выберите</find>
       <find>выберите тип</find>
       <find>прилет</find>
@@ -135,7 +121,19 @@
       <find>Операции с брониро</find>
       <find>start_oprtions</find>
       <find>start</find>
+      <find>test</find>
       <find>command_pay</find>
+      <find>демонстрация</find>
+      <find>avia.jp</find>
+      <find>AVIA.png</find>
+      <find>avia.jpg</find>
+      <find>avia</find>
+      <find>avia.</find>
+      <find>state = 11</find>
+      <find>своя</find>
+      <find>stop</find>
+      <find>докупить багаж</find>
+      <find>багажа</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -152,14 +150,14 @@
         <option value="$PROJECT_DIR$/machine_state.py" />
         <option value="$PROJECT_DIR$/viber_bot.py" />
         <option value="$PROJECT_DIR$/config.py" />
-        <option value="$PROJECT_DIR$/payment_test_main.py" />
         <option value="$PROJECT_DIR$/db.py" />
+        <option value="$PROJECT_DIR$/payment_test_main.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1278" />
+    <option name="width" value="1440" />
     <option name="height" value="825" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -201,6 +199,27 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.payment_test_main">
+    <configuration name="db" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="aviahackbot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/db.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="hackbot" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="aviahackbot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -214,27 +233,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hackbot.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="payment_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="aviahackbot" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/payment_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -309,10 +307,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.payment_test_main" />
+        <item itemvalue="Python.db" />
         <item itemvalue="Python.vedis_bot" />
         <item itemvalue="Python.viber_bot" />
         <item itemvalue="Python.hackbot" />
-        <item itemvalue="Python.payment_test" />
       </list>
     </recent_temporary>
   </component>
@@ -330,7 +328,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="825" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="825" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24312897" />
@@ -338,7 +336,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3287858" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.13642564" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26603" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39972714" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -446,7 +444,7 @@
     <entry file="file://$PROJECT_DIR$/payment_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="59" lean-forward="true" selection-start-column="59" selection-end-column="59" />
+          <caret column="59" selection-start-column="59" selection-end-column="59" />
           <folding>
             <element signature="e#239#253#0" expanded="true" />
           </folding>
@@ -463,14 +461,14 @@
     <entry file="file://$PROJECT_DIR$/config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <caret line="3" column="4" selection-start-line="3" selection-end-line="3" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="108" column="35" lean-forward="true" selection-start-line="108" selection-start-column="35" selection-end-line="108" selection-end-column="35" />
+        <state relative-caret-position="384">
+          <caret line="92" column="24" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -479,8 +477,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/payment_test_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="358" column="24" lean-forward="true" selection-start-line="358" selection-start-column="24" selection-end-line="358" selection-end-column="24" />
+        <state relative-caret-position="254">
+          <caret line="426" column="93" selection-start-line="426" selection-start-column="93" selection-end-line="426" selection-end-column="93" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>

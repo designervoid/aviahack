@@ -1,7 +1,8 @@
 TOKEN = '877450224:AAH8eOrZ0akUuN6er_LBoCerDzzHo-ZyUbA'
 
 PAYMENTS_PROVIDER_TOKEN = '381764678:TEST:9316'  # @BotFather -> Bot Settings -> Payments
-AVIA_IMAGE_URL = 'https://azimuth.aero/uploads/ckeditor/pictures/24/content_komponovka.jpg'
+AVIA_IMAGE_URL = open('/Users/lucio/Desktop/avia.jpg', 'rb')
+
 
 help_message = '''
 Через этого бота можно забронировать билеты на самолет.

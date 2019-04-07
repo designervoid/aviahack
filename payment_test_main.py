@@ -4,6 +4,8 @@ from datetime import datetime
 from db import AviaSchleduleArrival, AviaSchleduleDeparture, UserData
 from config import TOKEN
 from config import MESSAGES, PAYMENTS_PROVIDER_TOKEN, AVIA_IMAGE_URL
+from datetime import datetime
+from datetime import timedelta
 
 
 
@@ -29,12 +31,12 @@ def log(message, answer):
 
 
 def date_user_today(message):
-    date_today = {'today': str(datetime.utcfromtimestamp(message.date).strftime('%Y-%m-%d'))}
+    date_today = {'today': str(datetime.utcfromtimestamp(message.date).strftime('%d-%m-%Y'))}
     return date_today['today']
 
 
 def date_user_input(message):
-    date_today = {'user_input': str(datetime.utcfromtimestamp(message.date).strftime('%Y-%m-%d'))}
+    date_today = {'user_input': str(datetime.utcfromtimestamp(message.date).strftime('%d-%m-%Y'))}
     return date_today['user_input']
 
 
@@ -132,15 +134,17 @@ def command_terms(message):
 # PAYMENT
 @bot.message_handler(commands=['pay'])
 @bot.message_handler(regexp='Оплатить')
-def command_pay(message, title=MESSAGES['tm_title'], description=MESSAGES['tm_description'], prices=PRICE):
+def command_pay(message, text='Демонстрация свободных мест',
+                title=MESSAGES['tm_title'], description=MESSAGES['tm_description'],
+                prices=PRICE, photo_url=AVIA_IMAGE_URL):
     bot.send_message(message.chat.id,
-                     "Демонстрация свободных мест", parse_mode='Markdown')
+                     text, parse_mode='Markdown')
     bot.send_invoice(message.chat.id,
                      title=title,
                      description=description,
                      provider_token=PAYMENTS_PROVIDER_TOKEN,
                      currency='RUB',
-                     photo_url=AVIA_IMAGE_URL,
+                     photo_url=photo_url,
                      photo_height=512,  # !=0/None, иначе изображение не покажется
                      photo_width=512,
                      photo_size=512,
@@ -149,6 +153,14 @@ def command_pay(message, title=MESSAGES['tm_title'], description=MESSAGES['tm_de
                      start_parameter='avia-ticket-example',
                      invoice_payload='some-invoice-payload-for-our-internal-use'
                      )
+
+
+@bot.message_handler(commands=['pay_business'])
+def command_pay_business(message):
+    PRICE_BUSINESS = types.LabeledPrice(label='АвиаБилет Бизнес', amount=4222200)
+    command_pay(message, text='Ваш счет к оплате',
+                title=MESSAGES['tm_title'], description='Бизнес-класс',
+                prices=PRICE_BUSINESS, photo_url=None)
 
 
 @bot.shipping_query_handler(func=lambda query: True)
@@ -195,21 +207,27 @@ def start_user_input_check(message):
     global STATE
     STATE = 4
     global user_input
-    user_input = message.from_user.id
+    requests_to_text(message=message, answer='Введите дату')
 
 
 @bot.message_handler(regexp='Пересесть в бизнес-класс')
-def start_test(message):
+def start_sit_business(message):
     global STATE
     STATE = 11
     requests_to_text(message=message, answer='Введите номер вашего авиабилета')
+
+
+@bot.message_handler(regexp='Докупить багаж')
+def start_buy_bagadge(message):
+    global STATE
+    STATE = 12
+    requests_to_text(message=message, answer='Введите номер вашего авиабилета')
+
 
 # HIDE
 @bot.message_handler(commands=['stop'])
 def stop_handler(message):
     user_hide = telebot.types.ReplyKeyboardRemove()
-    bot.send_message(message.from_user.id, 'hide',
-                     reply_markup=user_hide)
 
 # TEXT
 @bot.message_handler(content_types=['text'])
@@ -253,8 +271,8 @@ def text_handler(message):
     elif STATE == 3:    # check tommorow date
         if message.text == 'Прибытие':
             for data in AviaSchleduleArrival.select():
-                check = date_user_today(message)
-                if str(check) == str(data.date):
+                next_day = (datetime.now() + timedelta(days=1)).strftime('%d-%m-%Y')
+                if str(next_day) == str(data.date):
                     requests_to_text(message=message, answer='Airport: {} \n'
                                                              'Number Flight: {} \n'
                                                              'Date: {} \n'
@@ -267,8 +285,8 @@ def text_handler(message):
 
         elif message.text == 'Отправление':
             for data in AviaSchleduleDeparture.select():
-                check = date_user_today(message)
-                if str(check) == str(data.date):
+                next_day = (datetime.now() + timedelta(days=0)).strftime('%d-%m-%Y')
+                if str(next_day) == str(data.date):
                     requests_to_text(message=message, answer='Airport: {} \n'
                                                              'Number Flight: {} \n'
                                                              'Date: {} \n'
@@ -282,9 +300,35 @@ def text_handler(message):
         elif message.text == 'Назад к выбору меню':
             start_handler(message=message)
 
-
     elif STATE == 4:
-        pass
+        if message.text == 'Назад к выбору меню':
+            start_handler(message=message)
+        elif message.text:
+            user_input_data = message.text
+            for data in AviaSchleduleArrival.select():
+                if str(user_input_data) == str(data.date):
+                    requests_to_text(message=message, answer='Airport: {} \n'
+                                                             'Number Flight: {} \n'
+                                                             'Date: {} \n'
+                                                             'Departure: {} \n'
+                                                             'Arrival: {}'.format(data.airport,
+                                                                                  data.flight,
+                                                                                  data.date,
+                                                                                  data.departure,
+                                                                                  data.arrival))
+
+            for data in AviaSchleduleDeparture.select():
+                if str(user_input_data) == str(data.date):
+                    requests_to_text(message=message, answer='Airport: {} \n'
+                                                             'Number Flight: {} \n'
+                                                             'Date: {} \n'
+                                                             'Departure: {} \n'
+                                                             'Arrival: {}'.format(data.airport,
+                                                                                  data.flight,
+                                                                                  data.date,
+                                                                                  data.departure,
+                                                                                  data.arrival))
+
 
     elif STATE == 5:
         vars_avia_types = 'Внутрирегиональный', 'Межрегиональный', 'Международный'
@@ -348,7 +392,7 @@ def text_handler(message):
             user_input_st10 = message.text
             UserData.create(data=user_input_st10,
                             is_relative=True)
-            if message.text == 'Отмена бронирования' or message.text == 'Обмен авиабилета':
+            if message.text == 'Отмена бронирования' or message.text == 'Обмен авиабилета' or message.text == 'Другое':
                 requests_to_text(message=message, answer='Введите ваше имя и номер телефона.'
                                                          '\nНаш оператор свяжется с вами.')
             elif message.text == 'Доп. услуги':
@@ -356,19 +400,37 @@ def text_handler(message):
                 custom_keyboard_in_commands(message=message, custom_keyboard=cmnds, text='Выберите желаемую услугу')
 
     elif STATE == 11:
-        if message.text:
+        if message.text == 'Назад к выбору меню':
+            start_handler(message=message)
+        elif message.text:
             user_input_st10_buy = message.text
             UserData.create(data=user_input_st10_buy,
                             is_relative=True)
-            requests_to_text(message=message, answer='Выберите свободное место(пример: F5)')
             bot.send_photo(message.from_user.id, photo=open('/Users/lucio/Desktop/avia.jpg', 'rb'))
-            #PRICE_BUSINESS = types.LabeledPrice(label='АвиаБилет Бизнес', amount=4222200)
-            #command_pay(message, title=MESSAGES['tm_title'], description=MESSAGES['tm_description'],
-                        #prices=PRICE_BUSINESS)
-        elif message.text == 'Назад к выбору меню':
-            start_handler(message=message)
 
-    steps = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            msg = bot.send_message(message.from_user.id, 'Выберите свободное место(пример: F16)')
+            bot.register_next_step_handler(msg, command_pay_business)
+    elif STATE == 12:
+        if message.text == 'Назад к выбору меню':
+            start_handler(message=message)
+        else:
+            user_input_st12 = message.text
+            UserData.create(data=user_input_st12,
+                            is_relative=True)
+            commands = 'Да', 'Нет'
+            resize_custom_keyboard_in_commands(message=message, custom_keyboard=commands,
+                                               text='В стоимость вашей услуги включена только ручная кладь.'
+                                                    ' Хотите докупить место для вещей?')
+            if message.text == 'Да':
+                PRICE_BUSINESS = types.LabeledPrice(label='АвиаБилет Бизнес', amount=122200)
+                command_pay(message, text='Ваш счет к оплате',
+                            title=MESSAGES['tm_title'], description='Докупить место для вещей',
+                            prices=PRICE_BUSINESS, photo_url=None)
+                stop_handler(message=message)
+            else:
+                start_buy_bagadge(message=message)
+
+    steps = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
     if STATE in steps:
         if message.text == 'Назад к выбору типа':
             start_schedule(message=message)
@@ -379,5 +441,5 @@ def text_handler(message):
 
 
 if __name__ == '__main__':
-    bot.polling(none_stop=True)
+    bot.polling(none_stop=True, timeout=0)
 
