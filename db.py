@@ -44,6 +44,8 @@ class UserData(Model):
 
 
 class AviaPlace(Model):
+    literal_avia = CharField()
+    num_avia = CharField()
     data_avia = CharField()
 
     class Meta:
@@ -56,6 +58,7 @@ if __name__ == '__main__':
     AviaSchleduleArrival.create_table()
     AviaSchleduleDeparture.create_table()
     UserData.create_table()
+    AviaPlace().create_table()
 
     literals = 'qwertyuiopasdfghjklzxcvbnm'
     nums = '1234567890'
